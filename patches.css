@@ -2623,3 +2623,44 @@ body:not([data-ds-dark-theme]) :is([data-variant], [data-chat-flow-kind="context
 body[data-ds-dark-theme] :is([data-variant], [data-chat-flow-kind="context"]) [data-disclosure-row="true"] {
   background: linear-gradient(90deg, #1c1b1f80, #2322265c 72%, #23222624) !important;
 }
+/* ===================================================================
+   [XuHe896] 天使翅膀装饰（素材来源：用户提供的 Kanade.png）
+   素材是 AI 生成的一整对翅膀（2048x2048，RGB 无 alpha），处理流程：
+     1) flood fill 从图像边缘抠除白色背景（只抠连通区，保住翅膀内部）
+     2) 按中间缝隙 x=1029 切分为左右两只
+     3) 裁剪内容区后等比缩放到高 320px（148 / 157 px 宽）
+   挂载在输入框座位容器 [data-composer-seat] 的左右外侧；
+   用 translate(-100%) / translate(100%) 保证完全位于容器之外，
+   不依赖容器具体宽度（v1 曾把翅膀放进 :before 盒子里，导致嵌进框内）。
+   =================================================================== */
+[data-composer-seat] {
+  position: relative !important;
+}
+
+[data-composer-seat]::before,
+[data-composer-seat]::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  height: 320px !important;
+  pointer-events: none !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  filter: drop-shadow(0 6px 16px #2a2a3a26) !important;
+  z-index: 0 !important;
+}
+
+[data-composer-seat]::before {
+  left: 0 !important;
+  width: 148px !important;
+  background-image: url(assets/wing-left.png) !important;
+  transform: translate(-100%, -50%) !important;
+}
+
+[data-composer-seat]::after {
+  right: 0 !important;
+  width: 157px !important;
+  background-image: url(assets/wing-right.png) !important;
+  transform: translate(100%, -50%) !important;
+}
