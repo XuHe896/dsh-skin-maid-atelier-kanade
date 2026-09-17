@@ -2520,3 +2520,18 @@ body[data-ds-dark-theme] [data-dsh-better-sidebar] {
   --dsw-specific-selector: rgba(45, 64, 111, 0.92);
   color: #e7ecf7;
 }
+
+/* ===================================================================
+   自定义改动（XuHe896）：仅保留自定义对话区背景
+   隐藏原作左右两个女仆立绘 —— 同时覆盖两层渲染：
+     body:before / body:after            （CSS 静态层）
+     [data-skin-chrome="character-stage"]
+     [data-maid-character]               （hooks.mjs 动态渲染层）
+   界面框架、侧栏、蕾丝装饰、配色与动效一律保持原作。
+   =================================================================== */
+body:before,
+body:after,
+[data-skin-chrome="character-stage"],
+[data-maid-character] {
+  display: none !important;
+}
