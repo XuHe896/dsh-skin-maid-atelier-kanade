@@ -307,34 +307,21 @@ export default function defineSkinHooks() {
       body.style.setProperty('--maid-workspace-crest-art', `url(${asset('maid-workspace-shield-v2.webp')})`)
       body.style.setProperty('--maid-workspace-ribbon-art', `url(${asset('maid-workspace-ribbon-v2.webp')})`)
 
-      function createCharacterStage() {
-        const stage = document.createElement('div')
-        stage.dataset.skinChrome = 'character-stage'
-        stage.dataset.skinOwner = SKIN_OWNER
-        stage.setAttribute('aria-hidden', 'true')
-
-        const left = document.createElement('img')
-        left.dataset.maidCharacter = 'left'
-        left.alt = ''
-        left.src = asset('maid-atelier-maid-left-v5.webp')
-
-        const right = document.createElement('img')
-        right.dataset.maidCharacter = 'right'
-        right.alt = ''
-        right.src = asset('maid-atelier-maid-right-v6.webp')
-
-        stage.append(left, right)
-        return stage
-      }
+      // [XuHe896] 原 createCharacterStage() 已整体移除：它创建的左右两个女仆
+      // 立绘（maid-atelier-maid-left-v5.webp / maid-atelier-maid-right-v6.webp）
+      // 及其资源文件均已从本皮肤删除。原实现见 git 历史或上游 maid-atelier。
 
       // 先挂载立绘与边框装饰，确保核心视觉层绝不因后续逻辑被阻断
-      try {
-        const characterStage = createCharacterStage()
-        ownedNodes.add(characterStage)
-        body.prepend(characterStage)
-      } catch (err) {
-        console.warn('[maid-atelier] stage mount error:', err)
-      }
+      // [XuHe896] 左右两个女仆立绘已移除：不再挂载 character-stage，
+      // 因此 maid-atelier-maid-left-v5.webp 与 maid-atelier-maid-right-v6.webp
+      // 不会被浏览器请求。原实现保留在下方以便回溯。
+      // try {
+      //   const characterStage = createCharacterStage()
+      //   ownedNodes.add(characterStage)
+      //   body.prepend(characterStage)
+      // } catch (err) {
+      //   console.warn('[maid-atelier] stage mount error:', err)
+      // }
 
       try {
         const topTrim = document.createElement('div')

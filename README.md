@@ -30,20 +30,22 @@
 
 ### 2. 移除两个女仆立绘
 
-原作的左右两个女仆角色由两层渲染：`patches.css` 里的 `body:before` / `body:after` 伪元素，以及 `hooks.mjs` 动态创建的 `character-stage` 容器（内含两个 `<img>`）。
+原作的左右两个女仆角色由**两层**渲染，本版把两层连同资源文件一并移除：
 
-本版**没有删除或改写原作任何既有规则**，而是在 `patches.css` 文件末尾追加了一段覆盖块：
+| 层 | 原作实现 | 本版处理 |
+| --- | --- | --- |
+| CSS 伪元素层 | `patches.css` 的 `body:before` / `body:after` 加载两张立绘 | 两条 `background` 引用已注释；另在文件末尾追加 `display: none !important` 覆盖块 |
+| 动态挂载层 | `hooks.mjs` 的 `createCharacterStage()` 创建 `character-stage` 容器并插入两个 `<img>` | 该函数及其挂载调用**整体移除**，图片因此不会被浏览器请求 |
+| 资源文件 | `assets/maid-atelier-maid-left-v5.webp`、`assets/maid-atelier-maid-right-v6.webp` | **已删除**（合计 806 KB） |
 
-```css
-body:before,
-body:after,
-[data-skin-chrome="character-stage"],
-[data-maid-character] {
-  display: none !important;
-}
-```
+被删除的资产：
 
-两层渲染因此同时被隐藏。追加块带有注释说明用途，便于日后回溯。
+| 文件 | 原作大小 |
+| --- | --- |
+| `assets/maid-atelier-maid-left-v5.webp` | 286,224 B |
+| `assets/maid-atelier-maid-right-v6.webp` | 520,206 B |
+
+这样处理之后，皮肤目录里不再有任何指向这两个文件的**活引用**（仅保留说明性注释），既不显示、也不加载、也不占体积。如果你希望恢复女仆，从上游 `maid-atelier` 取回这两个 `.webp` 与 `hooks.mjs` 即可。
 
 ### 3. 保持不变的部分
 
