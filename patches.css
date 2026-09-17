@@ -2654,14 +2654,14 @@ body[data-ds-dark-theme] :is([data-variant], [data-chat-flow-kind="context"]) [d
 [data-composer-seat]::before {
   left: 0 !important;
   width: 148px !important;
-  background-image: url(assets/wing-left.png) !important;
+  background-image: url(assets/wing-left.png?v=3) !important;
   transform: translate(-100%, -50%) !important;
 }
 
 [data-composer-seat]::after {
   right: 0 !important;
   width: 157px !important;
-  background-image: url(assets/wing-right.png) !important;
+  background-image: url(assets/wing-right.png?v=3) !important;
   transform: translate(100%, -50%) !important;
 }
 /* ===================================================================
@@ -2694,7 +2694,7 @@ body[data-ds-dark-theme] :is([data-variant], [data-chat-flow-kind="context"]) [d
   border-radius: 0 !important;
   pointer-events: none !important;
   background-color: transparent !important;
-  background-image: url(assets/wing-left.png), url(assets/wing-right.png) !important;
+  background-image: url(assets/wing-left.png?v=3), url(assets/wing-right.png?v=3) !important;
   background-repeat: no-repeat, no-repeat !important;
   background-position: left center, right center !important;
   background-size: 148px 320px, auto 320px !important;
