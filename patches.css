@@ -2536,12 +2536,10 @@ body:after,
   display: none !important;
 }
 /* ===================================================================
-   [XuHe896] 输入框改造 v3（A 方案）
-   1) 彻底移除原作蕾丝边框：border-image 全部子属性清零
-   2) 不做描边改为【整体实心填充】—— 用 background: inherit 与卡片
-      同色，覆盖范围沿用原蕾丝的 inset（-20px -14px -18px），
-      可把卡片外围可能残留的原生边框一并盖住
-   3) 翅膀装饰已移除，等待用户提供素材后再添加
+   [XuHe896] 输入框改造 v4
+   1) 蕾丝边框彻底移除（border-image 全部子属性清零）
+   2) 填充范围由 v3 的 -20/-14/-18 收窄到 -6px（原范围过头、影响美观）
+   3) 卡片改为银白配色；文字 / caret / 占位符同步反转为深色
    =================================================================== */
 [data-composer-card]:before {
   border: none !important;
@@ -2554,6 +2552,60 @@ body:after,
   border-radius: clamp(26px, 2vw, 34px) !important;
   background: inherit !important;
   filter: none !important;
-  inset: -20px -14px -18px !important;
+  inset: -6px !important;
   z-index: 1 !important;
+}
+
+/* 卡片银白底（两个主题统一，与原作 scheme-invariant 的设计一致） */
+[data-composer-card],
+[data-phase="hero"] [data-composer-card],
+body[data-ds-dark-theme] [data-composer-card] {
+  background: linear-gradient(#fffffff5, #eef0f5ea), #f8f9fbd0 !important;
+  box-shadow: 0 14px 40px #2a2a3a1f, inset 0 1px #ffffff !important;
+}
+
+/* 卡片内文字反转为深色 */
+[data-composer-card] [class*="backdrop"],
+[data-composer-card] [data-input-mirror],
+[data-composer-card] [data-composer-input],
+[data-composer-card] [data-lexical-editor],
+[data-composer-card] [contenteditable="true"],
+[data-composer-card] .uV2eYG_input {
+  color: #2c2b31 !important;
+}
+
+[data-composer-card] textarea,
+[data-composer-card] [data-composer-input],
+[data-composer-card] [data-lexical-editor],
+[data-composer-card] [contenteditable="true"] {
+  caret-color: #2c2b31 !important;
+}
+
+[data-composer-card] textarea::placeholder,
+[data-composer-card] [class*="placeholder"],
+[data-composer-card] [data-placeholder] {
+  color: #8c8a93 !important;
+}
+
+/* ===================================================================
+   [XuHe896] 左侧工作区侧栏改为纯白，文字同步转为深色
+   =================================================================== */
+:is([data-pane="sidebar"], [class*="sidebarCol"]) {
+  --dsw-alias-label-primary: #1e1d22 !important;
+  --dsw-alias-label-secondary: #46444c !important;
+  --dsw-alias-label-tertiary: #6b6972 !important;
+  --dsw-alias-label-caption: #8c8a93 !important;
+  --dsw-alias-border-l1: #00000018 !important;
+  --dsw-alias-border-l2: #00000026 !important;
+  --dsw-alias-button-elevated-fill: #0000000a !important;
+  --dsw-alias-button-floating-hover: #00000012 !important;
+  --dsw-alias-interactive-bg-hover: #0000000d !important;
+  --dsw-alias-interactive-bg-active: #c5a46830 !important;
+  --dsw-specific-sidebar-fill: #ffffff !important;
+  background: #ffffff !important;
+}
+
+:is([data-pane="sidebar"], [class*="sidebarCol"]) > div {
+  background: #ffffff !important;
+  box-shadow: none !important;
 }
