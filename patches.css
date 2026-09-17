@@ -2536,25 +2536,55 @@ body:after,
   display: none !important;
 }
 /* ===================================================================
-   [XuHe896] 输入框改造（A 方案）
-   1) 移除原作蕾丝边框（border-image 九宫格），改为 1px 简洁描边
-   2) 左右两侧加上白色天使翅膀装饰（SVG，版权干净、可无损缩放）
-   界面其它部分不受影响，原规则未被删除。
+   [XuHe896] 输入框改造 v2（A 方案）
+   1) 彻底移除原作蕾丝边框：覆盖 border-image 的全部子属性
+      source / slice / width / outset / repeat，消除残留
+   2) 改为 1px 简洁圆角描边
+   3) 天使翅膀改挂到 [data-composer-seat] 的伪元素上，位于输入框
+      左右外侧，不再嵌进框内（v1 挂在 :before 的 background 上，
+      而 :before 仅比卡片大 8px，导致翅膀落在框内）
    =================================================================== */
 [data-composer-card]:before {
   border-image-source: none !important;
-  border-style: solid !important;
-  border-width: 1px !important;
-  border-color: #dcdce4 !important;
+  border-image-slice: 0 !important;
+  border-image-width: 0 !important;
+  border-image-outset: 0 !important;
+  border-image-repeat: stretch !important;
+  border: 1px solid #dcdce4 !important;
   border-radius: 18px !important;
   filter: drop-shadow(0 6px 18px #00000012) !important;
   inset: -8px !important;
-  background:
-    url(assets/angel-wing-v1.svg) no-repeat left 2px top 50% / 150px auto,
-    url(assets/angel-wing-right-v1.svg) no-repeat right 2px top 50% / 150px auto;
+  background: none !important;
 }
 
 body[data-ds-dark-theme] [data-composer-card]:before {
   border-color: #45454e !important;
   filter: drop-shadow(0 6px 18px #00000040) !important;
+}
+
+/* 翅膀：挂在输入框座位容器的左右外侧 */
+[data-composer-seat] {
+  position: relative !important;
+}
+
+[data-composer-seat]::before,
+[data-composer-seat]::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  width: 168px !important;
+  height: 134px !important;
+  background: url(assets/angel-wing-v1.svg) no-repeat center / contain !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+[data-composer-seat]::before {
+  left: -152px !important;
+}
+
+[data-composer-seat]::after {
+  right: -152px !important;
+  transform: translateY(-50%) scaleX(-1) !important;
 }
