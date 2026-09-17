@@ -2536,10 +2536,12 @@ body:after,
   display: none !important;
 }
 /* ===================================================================
-   [XuHe896] 输入框改造 v4
+   [XuHe896] 输入框改造 v5
    1) 蕾丝边框彻底移除（border-image 全部子属性清零）
-   2) 填充范围由 v3 的 -20/-14/-18 收窄到 -6px（原范围过头、影响美观）
+   2) 填充范围由 v3 的 -20/-14/-18 收窄到 -6px
    3) 卡片改为银白配色；文字 / caret / 占位符同步反转为深色
+   注：v4 曾把左侧工作区侧栏改成纯白，已按要求整体回退，
+       侧栏恢复原作配色（深底 + 浅字），此处不再包含侧栏规则。
    =================================================================== */
 [data-composer-card]:before {
   border: none !important;
@@ -2585,27 +2587,4 @@ body[data-ds-dark-theme] [data-composer-card] {
 [data-composer-card] [class*="placeholder"],
 [data-composer-card] [data-placeholder] {
   color: #8c8a93 !important;
-}
-
-/* ===================================================================
-   [XuHe896] 左侧工作区侧栏改为纯白，文字同步转为深色
-   =================================================================== */
-:is([data-pane="sidebar"], [class*="sidebarCol"]) {
-  --dsw-alias-label-primary: #1e1d22 !important;
-  --dsw-alias-label-secondary: #46444c !important;
-  --dsw-alias-label-tertiary: #6b6972 !important;
-  --dsw-alias-label-caption: #8c8a93 !important;
-  --dsw-alias-border-l1: #00000018 !important;
-  --dsw-alias-border-l2: #00000026 !important;
-  --dsw-alias-button-elevated-fill: #0000000a !important;
-  --dsw-alias-button-floating-hover: #00000012 !important;
-  --dsw-alias-interactive-bg-hover: #0000000d !important;
-  --dsw-alias-interactive-bg-active: #c5a46830 !important;
-  --dsw-specific-sidebar-fill: #ffffff !important;
-  background: #ffffff !important;
-}
-
-:is([data-pane="sidebar"], [class*="sidebarCol"]) > div {
-  background: #ffffff !important;
-  box-shadow: none !important;
 }
