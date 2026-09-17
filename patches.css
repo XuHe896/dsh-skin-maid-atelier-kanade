@@ -2664,3 +2664,39 @@ body[data-ds-dark-theme] :is([data-variant], [data-chat-flow-kind="context"]) [d
   background-image: url(assets/wing-right.png) !important;
   transform: translate(100%, -50%) !important;
 }
+/* ===================================================================
+   [XuHe896] 天使翅膀 v2 —— 改用卡片自身承载
+   v1 挂在 [data-composer-seat] 上，但该属性无法在本机前端产物中验证
+   是否存在（DSH 前端构建产物里搜不到 composer-seat），因此可能整个
+   选择器都没匹配到，翅膀自然不显示。
+   v2 改挂 [data-composer-card]（卡片本身，确定存在）的 ::after：
+     - ::after 原本是卡片背景层的放大副本，这里改为翅膀承载层
+     - z-index: -1 让它位于卡片下层，翅膀从卡片左右两侧背后伸出
+     - left/right 取负值把盒子撑到卡片外，翅膀按 background-position
+       贴齐盒子左右边缘，因此一定落在卡片外侧
+   =================================================================== */
+[data-composer-seat]::before,
+[data-composer-seat]::after {
+  content: none !important;
+  background-image: none !important;
+}
+
+[data-composer-card]:after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  top: 50% !important;
+  bottom: auto !important;
+  left: -152px !important;
+  right: -162px !important;
+  height: 320px !important;
+  transform: translateY(-50%) !important;
+  border-radius: 0 !important;
+  pointer-events: none !important;
+  background-color: transparent !important;
+  background-image: url(assets/wing-left.png), url(assets/wing-right.png) !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-position: left center, right center !important;
+  background-size: 148px 320px, 157px 320px !important;
+  filter: drop-shadow(0 6px 16px #2a2a3a26) !important;
+}
