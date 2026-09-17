@@ -2588,3 +2588,38 @@ body[data-ds-dark-theme] [data-composer-card] {
 [data-composer-card] [data-placeholder] {
   color: #8c8a93 !important;
 }
+/* ===================================================================
+   [XuHe896] 消息气泡调暗 + 降低不透明度
+   原作气泡为 #f0f0f1f2 / #fbfbfcf0（94-95% 不透明），几乎完全遮住
+   对话区背景图。这里降到 75-82% 并略微加深，让角色背景透出来，
+   同时保持文字对比度可读。
+   =================================================================== */
+[class*="userRow"] [class*="bubble"] {
+  background: #e2e2e8c0 !important;
+  border: 1px solid #c5a4686b !important;
+  box-shadow: 0 6px 20px #34323814 !important;
+}
+
+[data-chat-flow-kind="assistant-step"] > * > * > * > div[class*="markdown"] {
+  background: #eeeef4cc !important;
+  border: 1px solid #c5a4685e !important;
+  box-shadow: 0 4px 14px #34323810 !important;
+}
+
+body[data-ds-dark-theme] [class*="userRow"] [class*="bubble"] {
+  background: #2f2e33d1 !important;
+}
+
+body[data-ds-dark-theme] [data-chat-flow-kind="assistant-step"] > * > * > * > div[class*="markdown"] {
+  background: #26252ad1 !important;
+  border-color: #d3b4775c !important;
+}
+
+/* 思考/上下文等折叠块同步降低不透明度 */
+body:not([data-ds-dark-theme]) :is([data-variant], [data-chat-flow-kind="context"]) [data-disclosure-row="true"] {
+  background: linear-gradient(90deg, #fbfbfc47, #fbfbfc2b 72%, #fbfbfc12) !important;
+}
+
+body[data-ds-dark-theme] :is([data-variant], [data-chat-flow-kind="context"]) [data-disclosure-row="true"] {
+  background: linear-gradient(90deg, #1c1b1f80, #2322265c 72%, #23222624) !important;
+}
