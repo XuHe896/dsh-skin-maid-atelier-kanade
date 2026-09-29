@@ -2714,23 +2714,3 @@ body[data-ds-dark-theme] :is([data-variant], [data-chat-flow-kind="context"]) [d
 [data-dsh-wallpaper-layer="scrim"] {
   background: rgba(0, 0, 0, 0.04) !important;
 }
-/* ===================================================================
-   [XuHe896] 给插件/设置面板加毛玻璃底（解决"灰蒙蒙"）
-   皮肤插件在带背景图时把所有界面面板设为完全透明：
-     html[data-dsh-wallpaper-active] [data-dsh-wallpaper-surface] {
-       background-color: transparent !important; }
-   面板没有自己的底色，直接露出偏暗的背景图，于是大片空白区域显得
-   灰蒙蒙。这里给这些面板补一层半透明毛玻璃底：既保留背景氛围，
-   又让面板内容有稳定、可读的承载面。两个主题分别给色。
-   =================================================================== */
-html[data-dsh-wallpaper-active]:has(body[data-ds-dark-theme]) [data-dsh-wallpaper-surface] {
-  background-color: rgba(26, 26, 34, 0.82) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(1.06) !important;
-  backdrop-filter: blur(16px) saturate(1.06) !important;
-}
-
-html[data-dsh-wallpaper-active]:has(body:not([data-ds-dark-theme])) [data-dsh-wallpaper-surface] {
-  background-color: rgba(250, 250, 253, 0.84) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(1.06) !important;
-  backdrop-filter: blur(16px) saturate(1.06) !important;
-}
