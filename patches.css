@@ -2700,3 +2700,13 @@ body[data-ds-dark-theme] :is([data-variant], [data-chat-flow-kind="context"]) [d
   background-size: 148px 320px, auto 320px !important;
   filter: drop-shadow(0 6px 16px #2a2a3a26) !important;
 }
+/* ===================================================================
+   [XuHe896] 背景遮罩减弱（让背景图更亮）
+   皮肤插件在背景图上盖了一层 dim 遮罩（默认 dim=25，即 25% 纯黑），
+   该值存于 Electron 主机侧存储、不在 ~/.dsh 的配置文件里，无法直接改；
+   因此用 CSS 覆盖它的内联样式，把 25% 降到 10%。
+   z-index: -3 = 背景图层(media)，-2 = 遮罩层(scrim)。
+   =================================================================== */
+[data-dsh-wallpaper-layer="scrim"] {
+  background: rgba(0, 0, 0, 0.10) !important;
+}
